@@ -5,7 +5,6 @@ import Mensaje from './Mensaje'
 
 const Modal = ({ setModal, animar, setAnimar, guardarGasto }) => {
 
-    const [gasto, setGasto] = useState([]);
     const [mensaje, setMensaje] = useState('');
     const [nombre, setNombre] = useState('');
     const [cantidad, setCantidad] = useState(0);
@@ -22,9 +21,11 @@ const Modal = ({ setModal, animar, setAnimar, guardarGasto }) => {
         e.preventDefault()
         if ([nombre, cantidad, categoria].includes('')) {
             setMensaje('Todos los campos son obligatorios')
-        } else {
-            console.log('Subiendo')
-        }
+            return
+        } 
+        setMensaje('')
+        cerrarModal()
+        
         guardarGasto({ nombre, cantidad, categoria })
     }
 
