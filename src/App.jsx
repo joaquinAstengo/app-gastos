@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { generarId } from './helpers'
 import Header from './components/Header';
 import ListadoGastos from './components/ListadoGastos';
 import Modal from './components/Modal';
 import IconoNuevoGasto from './img/nuevo-gasto.svg'
-import { generarId } from './helpers'
 
 function App() {
   const [presupuesto, setPresupuesto] = useState(0)
@@ -39,8 +39,12 @@ function App() {
 
       {isValidPresupuesto && (
         <>
-          <ListadoGastos></ListadoGastos>
-
+          <main>
+            <ListadoGastos
+              gastos={gastos}
+            ></ListadoGastos>
+          </main>
+          
           <div className='nuevo-gasto'>
             <img
               onClick={handleNuevoGasto}

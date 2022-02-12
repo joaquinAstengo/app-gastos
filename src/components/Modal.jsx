@@ -22,11 +22,10 @@ const Modal = ({ setModal, animar, setAnimar, guardarGasto }) => {
         if ([nombre, cantidad, categoria].includes('')) {
             setMensaje('Todos los campos son obligatorios')
             return
-        } 
+        }
         setMensaje('')
-        cerrarModal()
-        
         guardarGasto({ nombre, cantidad, categoria })
+        cerrarModal()
     }
 
     return (
