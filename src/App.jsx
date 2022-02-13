@@ -30,6 +30,8 @@ function App() {
   return (
 
     <>
+    <div className={modal && 'fijar'}>
+
       <Header
         isValidPresupuesto={isValidPresupuesto}
         setIsValidPresupuesto={setIsValidPresupuesto}
@@ -51,7 +53,7 @@ function App() {
               onClick={handleNuevoGasto}
               src={IconoNuevoGasto}
               alt="Icono Nuevo Gasto"
-            />
+              />
           </div>
         </>
       )}
@@ -61,8 +63,9 @@ function App() {
         setAnimar={setAnimar}
         setModal={setModal}
         guardarGasto={guardarGasto}
-      ></Modal>}
+        ></Modal>}
 
+        </div>
     </>
   )
 }
