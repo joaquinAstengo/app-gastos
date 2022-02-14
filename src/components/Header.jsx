@@ -4,13 +4,14 @@ import ControlPresupuesto from '../ControlPresupuesto';
 import { useState } from "react";
 
 
-const Header = ({ presupuesto, setPresupuesto, isValidPresupuesto, setIsValidPresupuesto}) => {
+const Header = ({ gastos, presupuesto, setPresupuesto, isValidPresupuesto, setIsValidPresupuesto}) => {
 
   return (
     <header>
       <h1>Planificador de gastos</h1>
       {isValidPresupuesto ? (
         <ControlPresupuesto
+        gastos={gastos}
         presupuesto={presupuesto}
         ></ControlPresupuesto>
       ): (

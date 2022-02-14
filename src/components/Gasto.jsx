@@ -19,7 +19,7 @@ const diccionarioIconos = {
   suscripciones: IconoSuscripciones,
 }
 
-const Gasto = ({ gasto }) => {
+const Gasto = ({setGastado, gasto }) => {
   const { categoria, nombre, cantidad, id, fecha } = gasto;
   return (
     <div className='gasto sombra'>
