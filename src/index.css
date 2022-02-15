@@ -201,6 +201,7 @@ header h1 {
 .formulario input[type="number"].nuevo-presupuesto {
     font-size: 2.8rem;
     text-align: center;
+    width: auto;
 }
 
 .contenedor-presupuesto svg {
