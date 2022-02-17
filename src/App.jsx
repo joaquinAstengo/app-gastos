@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { generarId } from './helpers'
 import Header from './components/Header';
 import ListadoGastos from './components/ListadoGastos';
@@ -11,8 +11,14 @@ function App() {
   const [modal, setModal] = useState(false)
   const [animar, setAnimar] = useState(false)
   const [gastos, setGastos] = useState([])
+  const [gastoEditar, setGastoEditar] = useState({})
 
-
+  useEffect(() => {
+    if (Object.keys(gastoEditar).length > 0){
+      handleNuevoGasto()
+    }
+  }, [gastoEditar])
+  
   const guardarGasto = gasto => {
     gasto.id = generarId()
     gasto.fecha = Date.now()
@@ -21,7 +27,6 @@ function App() {
 
   const handleNuevoGasto = () => {
     setModal(true)
-
     setTimeout(() => {
       setAnimar(true)
     }, 300);
@@ -30,43 +35,44 @@ function App() {
   return (
 
     <>
-    <div className={modal ? 'fijar' : ''}>
+      <div className={modal ? 'fijar' : ''}>
 
-      <Header
-        gastos={gastos}
-        isValidPresupuesto={isValidPresupuesto}
-        setIsValidPresupuesto={setIsValidPresupuesto}
-        presupuesto={presupuesto}
-        setPresupuesto={setPresupuesto}
-      ></Header>
+        <Header
+          gastos={gastos}
+          isValidPresupuesto={isValidPresupuesto}
+          setIsValidPresupuesto={setIsValidPresupuesto}
+          presupuesto={presupuesto}
+          setPresupuesto={setPresupuesto}
+        ></Header>
 
 
-      {isValidPresupuesto && (
-        <>
-          <main>
-            <ListadoGastos
-              gastos={gastos}
-            ></ListadoGastos>
-          </main>
+        {isValidPresupuesto && (
+          <>
+            <main>
+              <ListadoGastos
+                gastos={gastos}
+                setGastoEditar={setGastoEditar}
+              ></ListadoGastos>
+            </main>
 
-          <div className='nuevo-gasto'>
-            <img
-              onClick={handleNuevoGasto}
-              src={IconoNuevoGasto}
-              alt="Icono Nuevo Gasto"
+            <div className='nuevo-gasto'>
+              <img
+                onClick={handleNuevoGasto}
+                src={IconoNuevoGasto}
+                alt="Icono Nuevo Gasto"
               />
-          </div>
-        </>
-      )}
+            </div>
+          </>
+        )}
 
-      {modal && <Modal
-        animar={animar}
-        setAnimar={setAnimar}
-        setModal={setModal}
-        guardarGasto={guardarGasto}
+        {modal && <Modal
+          animar={animar}
+          setAnimar={setAnimar}
+          setModal={setModal}
+          guardarGasto={guardarGasto}
         ></Modal>}
 
-        </div>
+      </div>
     </>
   )
 }

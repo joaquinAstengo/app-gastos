@@ -26,35 +26,45 @@ const diccionarioIconos = {
   suscripciones: IconoSuscripciones,
 };
 
-const Gasto = ({ setGastado, gasto }) => {
+
+const Gasto = ({ setGastado, gasto, setGastoEditar }) => {
   const { categoria, nombre, cantidad, id, fecha } = gasto;
-  const leadingActions = () =>{
-    console.log('Editar...')
-  }
-  const trailingActions = () =>{
-    console.log('Eliminar...')
-  }
+  const leadingActions = () => (
+    <LeadingActions>
+      <SwipeAction onClick={() => setGastoEditar(gasto)}>
+        Editar
+      </SwipeAction>
+    </LeadingActions>
+  )
+
+  const trailingActions = () => (
+    <TrailingActions>
+      <SwipeAction onClick={() => console.log('Eliminar')}>
+        Eliminar
+      </SwipeAction>
+    </TrailingActions>
+  )
 
   return (
     <SwipeableList>
       <SwipeableListItem
-      leadingActions={leadingActions}
-      trailingActions={trailingActions}>
+        leadingActions={leadingActions()}
+        trailingActions={trailingActions()}>
 
-    <div className="gasto sombra">
-      <div className="contenido-gasto">
-        <img src={diccionarioIconos[categoria]} alt="" />
-        <div className="descripcion-gasto">
-          <p className="nombre-gasto">{nombre}</p>
-          <p className="categoria">{categoria}</p>
-          <p className="fecha-gasto">
-            Agregado el {""}
-            <span>{formatearFecha(fecha)}</span>
-          </p>
+        <div className="gasto sombra">
+          <div className="contenido-gasto">
+            <img src={diccionarioIconos[categoria]} alt="" />
+            <div className="descripcion-gasto">
+              <p className="nombre-gasto">{nombre}</p>
+              <p className="categoria">{categoria}</p>
+              <p className="fecha-gasto">
+                Agregado el {""}
+                <span>{formatearFecha(fecha)}</span>
+              </p>
+            </div>
+            <p className="cantidad-gasto">$ {cantidad}</p>
+          </div>
         </div>
-        <p className="cantidad-gasto">$ {cantidad}</p>
-      </div>
-    </div>
       </SwipeableListItem>
     </SwipeableList>
   );
