@@ -27,6 +27,7 @@ function App() {
 
   const handleNuevoGasto = () => {
     setModal(true)
+    setGastoEditar({})
     setTimeout(() => {
       setAnimar(true)
     }, 300);
@@ -70,6 +71,7 @@ function App() {
           setAnimar={setAnimar}
           setModal={setModal}
           guardarGasto={guardarGasto}
+          gastoEditar={gastoEditar}
         ></Modal>}
 
       </div>

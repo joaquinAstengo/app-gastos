@@ -14,7 +14,7 @@
     "react-swipeable-list": "^1.5.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^1.0.7",
-    "vite": "^2.8.0"
+    "@vitejs/plugin-react": "^1.0.5",
+    "vite": "^2.8.3"
   }
 }
