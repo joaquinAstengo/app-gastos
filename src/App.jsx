@@ -14,11 +14,18 @@ function App() {
   const [gastoEditar, setGastoEditar] = useState({})
 
   useEffect(() => {
-    if (Object.keys(gastoEditar).length > 0){
-      handleNuevoGasto()
-    }
-  }, [gastoEditar])
+    if (Object.keys(gastoEditar).length > 0) {
+
+      setModal(true)
   
+      setTimeout(() => {
+        setAnimar(true)
+      }, 300);
+    }
+
+
+  }, [gastoEditar])
+
   const guardarGasto = gasto => {
     gasto.id = generarId()
     gasto.fecha = Date.now()
@@ -27,6 +34,8 @@ function App() {
 
   const handleNuevoGasto = () => {
     setModal(true)
+    setGastoEditar({})
+
     setTimeout(() => {
       setAnimar(true)
     }, 300);
@@ -70,6 +79,7 @@ function App() {
           setAnimar={setAnimar}
           setModal={setModal}
           guardarGasto={guardarGasto}
+          gastoEditar={gastoEditar}
         ></Modal>}
 
       </div>
