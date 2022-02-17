@@ -9,12 +9,17 @@ const Modal = ({ setModal, animar, setAnimar, guardarGasto, gastoEditar }) => {
     const [nombre, setNombre] = useState('');
     const [cantidad, setCantidad] = useState(0);
     const [categoria, setCategoria] = useState('');
+    const [id, setId] = useState('')
+    const [fecha, setFecha] = useState('')
+
 
     useEffect(()=>{
         if (Object.keys(gastoEditar).length > 0){
             setNombre(gastoEditar.nombre);
             setCantidad(gastoEditar.cantidad);
             setCategoria(gastoEditar.categoria);
+            setId(gastoEditar.id)
+            setFecha(gastoEditar.fecha)
           }
     }, [])
 
@@ -32,7 +37,7 @@ const Modal = ({ setModal, animar, setAnimar, guardarGasto, gastoEditar }) => {
             return
         }
         setMensaje('')
-        guardarGasto({ nombre, cantidad, categoria })
+        guardarGasto({ nombre, cantidad, categoria, id, fecha})
         cerrarModal()
     }
 
@@ -43,7 +48,7 @@ const Modal = ({ setModal, animar, setAnimar, guardarGasto, gastoEditar }) => {
                 <img src={CerrarModal} alt="Cerrar Modal" onClick={cerrarModal} />
             </div>
             <form className={`formulario ${animar ? "animar" : "cerrar"}`}>
-                <legend>Nuevo Gasto</legend>
+                <legend>{gastoEditar.nombre ? "Editar Gasto" : "Nuevo Gasto"}</legend>
                 {mensaje && <Mensaje tipo="error">{mensaje}</Mensaje>}
                 <div className="campo">
                     <label htmlFor="nombre">Nombre Gasto</label>
@@ -81,7 +86,7 @@ const Modal = ({ setModal, animar, setAnimar, guardarGasto, gastoEditar }) => {
                         <option value="suscripciones">Suscripciones</option>
                     </select>
                 </div>
-                <input onClick={handleSubmit} type="submit" value="Añadir Gasto" />
+                <input onClick={handleSubmit} type="submit" value={gastoEditar.nombre ? "Editar Gasto" : "Nuevo Gasto"} />
             </form>
         </div>
     )
