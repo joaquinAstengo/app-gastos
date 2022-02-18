@@ -47,10 +47,6 @@ function App() {
   const handleNuevoGasto = () => {
     setModal(true)
     setGastoEditar({})
-<<<<<<< HEAD
-=======
-
->>>>>>> tmp
     setTimeout(() => {
       setAnimar(true)
     }, 300);

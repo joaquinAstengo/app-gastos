@@ -1,18 +1,10 @@
-<<<<<<< HEAD
 import { useState, useEffect} from 'react'
 import { createLogger } from 'vite';
-=======
-import { useState, useEffect } from 'react'
->>>>>>> tmp
 import CerrarModal from '../img/cerrar.svg'
 import Mensaje from './Mensaje'
 
 
-<<<<<<< HEAD
-const Modal = ({ setModal, animar, setAnimar,guardarGasto, gastoEditar }) => {
-=======
 const Modal = ({ setModal, animar, setAnimar, guardarGasto, gastoEditar, setGastoEditar }) => {
->>>>>>> tmp
 
     const [mensaje, setMensaje] = useState('');
     const [nombre, setNombre] = useState('');
