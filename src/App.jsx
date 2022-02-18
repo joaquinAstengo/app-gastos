@@ -17,7 +17,7 @@ function App() {
     if (Object.keys(gastoEditar).length > 0) {
 
       setModal(true)
-  
+
       setTimeout(() => {
         setAnimar(true)
       }, 300);
@@ -27,19 +27,20 @@ function App() {
   }, [gastoEditar])
 
   const guardarGasto = gasto => {
-    if(gasto.id){
+    if (gasto.id) {
       const gastosActualizados = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
       setGastos(gastosActualizados)
+      setGastoEditar({})
     } else {
       gasto.id = generarId()
       gasto.fecha = Date.now()
       setGastos([...gastos, gasto])
     }
-    
+
   }
 
-  const eliminarGasto = id =>{
-    const gastosActualizados =  gastos.filter(gasto => gasto.id !== id);
+  const eliminarGasto = id => {
+    const gastosActualizados = gastos.filter(gasto => gasto.id !== id);
     setGastos(gastosActualizados)
   }
 
@@ -70,7 +71,7 @@ function App() {
           <>
             <main>
               <ListadoGastos
-              eliminarGasto={eliminarGasto}
+                eliminarGasto={eliminarGasto}
                 gastos={gastos}
                 setGastoEditar={setGastoEditar}
               ></ListadoGastos>
@@ -87,6 +88,7 @@ function App() {
         )}
 
         {modal && <Modal
+          setGastoEditar={setGastoEditar}
           animar={animar}
           setAnimar={setAnimar}
           setModal={setModal}
