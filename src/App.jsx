@@ -6,13 +6,16 @@ import Modal from './components/Modal';
 import IconoNuevoGasto from './img/nuevo-gasto.svg'
 
 function App() {
+
+
+
   const [presupuesto, setPresupuesto] = useState(
     Number(localStorage.getItem('presupuesto')) ?? 0
   )
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
   const [modal, setModal] = useState(false)
   const [animar, setAnimar] = useState(false)
-  const [gastos, setGastos] = useState([])
+  const [gastos, setGastos] = useState(localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : [])
   const [gastoEditar, setGastoEditar] = useState({})
 
   useEffect(() => {
@@ -24,11 +27,15 @@ function App() {
         setAnimar(true)
       }, 300);
     }
-
-
   }, [gastoEditar])
 
+  useEffect(() => {
+    localStorage.setItem('gastos', JSON.stringify(gastos) ?? 0)
+  }, [gastos])
+  
+
   const guardarGasto = gasto => {
+
     if (gasto.id) {
       const gastosActualizados = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
       setGastos(gastosActualizados)
@@ -38,7 +45,6 @@ function App() {
       gasto.fecha = Date.now()
       setGastos([...gastos, gasto])
     }
-
   }
 
   const eliminarGasto = id => {
@@ -52,24 +58,23 @@ function App() {
     setTimeout(() => {
       setAnimar(true)
     }, 300);
-
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     localStorage.setItem('presupuesto', presupuesto ?? 0)
   }, [presupuesto])
 
-  useEffect(()=>{
+
+  useEffect(() => {
     const presupuestoLS = Number(localStorage.getItem('presupuesto') ?? 0)
-    if(presupuestoLS > 0) {
-      setIsValidPresupuesto(true)}
+    if (presupuestoLS > 0) {
+      setIsValidPresupuesto(true)
+    }
   }, [])
 
-  
   return (
     <>
       <div className={modal ? 'fijar' : ''}>
-
         <Header
           gastos={gastos}
           isValidPresupuesto={isValidPresupuesto}
@@ -77,7 +82,6 @@ function App() {
           presupuesto={presupuesto}
           setPresupuesto={setPresupuesto}
         ></Header>
-
 
         {isValidPresupuesto && (
           <>
